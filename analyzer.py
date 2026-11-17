@@ -17,7 +17,6 @@ from prompts import qa_prompt, recommendation_prompt, summary_prompt
 STRUCTURED_ATTEMPTS = 3
 RETRY_BACKOFF_SECONDS = 1.5
 
-
 def invoke_structured(chain, payload: Dict[str, Any]):
     """Invoke a structured-output chain, retrying a malformed response."""
     last_error: Exception | None = None
