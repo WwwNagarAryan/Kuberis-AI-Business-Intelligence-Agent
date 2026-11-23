@@ -14,6 +14,7 @@ from prompts import qa_prompt, recommendation_prompt, summary_prompt
 # rate-limited, or the model answered without a well-formed tool call. The Groq
 # client retries the first kind; nothing retries the second, and it is the one
 # that makes an endpoint fail intermittently for no visible reason.
+
 STRUCTURED_ATTEMPTS = 3
 RETRY_BACKOFF_SECONDS = 1.5
 
@@ -28,7 +29,6 @@ def invoke_structured(chain, payload: Dict[str, Any]):
             if attempt < STRUCTURED_ATTEMPTS - 1:
                 time.sleep(RETRY_BACKOFF_SECONDS * (attempt + 1))
     raise last_error
-
 
 def summarize_without_llm(df: pd.DataFrame) -> DatasetSummary:
     """Build a dataset summary from Pandas alone.
